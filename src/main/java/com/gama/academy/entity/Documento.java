@@ -11,10 +11,10 @@ public class Documento {
 	
 	@Id
 	@Column(name = "cpf", nullable = false)
-	private Integer cpf;
+	private String cpf;
 	
 	@Column(name = "rg", nullable = false)
-	private int rg;
+	private String rg;
 	
 	@Column(name = "habilitacao", nullable = true)
 	private String habilitacao;
@@ -23,27 +23,27 @@ public class Documento {
 	private boolean isVeiculo;
 
 	public Documento() {}
-	
-	public Documento(int cpf, int rg, String habilitacao, boolean isVeiculo) {
+
+	public Documento(String cpf, String rg, String habilitacao, boolean isVeiculo) {
 		this.cpf = cpf;
 		this.rg = rg;
 		this.habilitacao = habilitacao;
 		this.isVeiculo = isVeiculo;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	public int getRg() {
+	public String getRg() {
 		return rg;
 	}
 
-	public void setRg(int rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
 
@@ -61,20 +61,5 @@ public class Documento {
 
 	public void setVeiculo(boolean isVeiculo) {
 		this.isVeiculo = isVeiculo;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-	
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
 	}
 }

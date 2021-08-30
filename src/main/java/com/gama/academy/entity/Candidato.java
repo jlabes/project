@@ -1,11 +1,13 @@
 package com.gama.academy.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,57 +24,57 @@ public class Candidato {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 	
-	@Column(name = "nome", nullable = false)
-	private Date dataNascimento;
+	@Column(name = "dataNascimento", nullable = false)
+	private LocalDate dataNascimento;
 	
-	@Column(name = "documento", nullable = true)
-	private int telefone;
+	@Column(name = "telefone", nullable = true)
+	private String telefone;
 	
-	@Column(name = "documento", nullable = false)
-	private int celular;
+	@Column(name = "celular", nullable = false)
+	private String celular;
 	
-	@Column(name = "documento", nullable = true)
+	@Column(name = "email", nullable = true)
 	private String email; 
 	
-	@Column(name = "documento", nullable = false)
+	@Column(name = "cargoPretendido", nullable = false)
 	private String cargoPretendido;
 	
-	@Column(name = "documento", nullable = true)
+	@Column(name = "estadoCivil", nullable = true)
 	private String estadoCivil;
 	
-	@Column(name = "documento", nullable = true)
+	@Column(name = "genero", nullable = true)
 	private String genero;
 	
-	@Column(name = "endereco", nullable = false)
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="endereco_id", referencedColumnName = "id")
 	private Endereco endereco;
 	
-	@Column(name = "documento", nullable = false)
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "documento_cpf", referencedColumnName = "cpf")
 	private Documento documento;
 	
 	public Candidato() {}
-
-	public Candidato(long id, String nome, Date dataNascimento, int telefone, String email, String cargoPretendido,
-			String estadoCivil, String genero, Endereco endereco, Documento documento, int celular) {
+	
+	public Candidato(Long id, String nome, LocalDate dataNascimento, String telefone, String celular, String email,
+			String cargoPretendido, String estadoCivil, String genero, Endereco endereco, Documento documento) {
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
+		this.celular = celular;
 		this.email = email;
 		this.cargoPretendido = cargoPretendido;
 		this.estadoCivil = estadoCivil;
 		this.genero = genero;
 		this.endereco = endereco;
 		this.documento = documento;
-		this.celular = celular;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -84,20 +86,28 @@ public class Candidato {
 		this.nome = nome;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	public String getEmail() {
@@ -148,11 +158,4 @@ public class Candidato {
 		this.documento = documento;
 	}
 
-	public int getCelular() {
-		return celular;
-	}
-
-	public void setCelular(int celular) {
-		this.celular = celular;
-	}
 }
